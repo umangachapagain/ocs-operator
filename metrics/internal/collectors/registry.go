@@ -11,7 +11,10 @@ import (
 func RegisterCustomResourceCollectors(registry *prometheus.Registry, opts *options.Options) {
 	cephObjectStoreCollector := NewCephObjectStoreCollector(opts)
 	cephObjectStoreCollector.Run(opts.StopCh)
+	cephClusterCollector := NewCephClusterCollector(opts)
+	cephClusterCollector.Run(opts.StopCh)
 	registry.MustRegister(
 		cephObjectStoreCollector,
+		cephClusterCollector,
 	)
 }

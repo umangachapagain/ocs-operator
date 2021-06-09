@@ -16,8 +16,6 @@ import (
 const (
 	// name of the project/exporter
 	namespace = "ocs"
-	// component within the project/exporter
-	subsystem = "rgw"
 )
 
 var _ prometheus.Collector = &CephObjectStoreCollector{}
@@ -31,6 +29,9 @@ type CephObjectStoreCollector struct {
 
 // NewCephObjectStoreCollector constructs a collector
 func NewCephObjectStoreCollector(opts *options.Options) *CephObjectStoreCollector {
+	// component within the project/exporter
+	subsystem := "rgw"
+
 	client, err := rookclient.NewForConfig(opts.Kubeconfig)
 	if err != nil {
 		klog.Error(err)
